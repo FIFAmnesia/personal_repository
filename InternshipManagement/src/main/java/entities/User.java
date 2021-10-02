@@ -40,6 +40,9 @@ public class User implements GenericEntity {
   @Column(name = "email", nullable = false)
   private String email;
 
+  @Column(name = "username", nullable = false)
+  private String username;
+
   @ManyToOne(fetch = LAZY, optional = true)
   @JoinColumn(name = "company_id", referencedColumnName = "id", nullable = false)
   private Company company;
@@ -118,6 +121,14 @@ public class User implements GenericEntity {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public Company getCompany() {
