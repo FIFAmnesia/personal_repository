@@ -33,7 +33,6 @@ public class Role implements GenericEntity {
   @Column(name = "description", nullable = false)
   private String description;
 
-  @JsonIgnore
   @OneToMany(fetch = LAZY, mappedBy = "role", targetEntity = Permission.class)
   private Set<Permission> permissions;
 
