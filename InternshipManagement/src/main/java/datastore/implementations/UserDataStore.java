@@ -44,9 +44,11 @@ public class UserDataStore extends AbstractDataStore<User> {
         .createQuery("SELECT u FROM User u "
             + "LEFT JOIN FETCH u.company "
             + "LEFT JOIN FETCH u.studentInformation "
-            + "LEFT JOIN FETCH u.role "
-            + "LEFT JOIN FETCH u.requests r "
-            + "LEFT JOIN FETCH r.offer o "
+            + "LEFT JOIN FETCH u.role r "
+            + "LEFT JOIN FETCH r.permissions "
+            + "LEFT JOIN FETCH u.credentials "
+            + "LEFT JOIN FETCH u.requests req "
+            + "LEFT JOIN FETCH req.offer o "
             + "LEFT JOIN FETCH o.company "
             + "LEFT JOIN FETCH o.jobDescription "
             + "LEFT JOIN FETCH u.internships "
@@ -62,6 +64,7 @@ public class UserDataStore extends AbstractDataStore<User> {
             + "LEFT JOIN FETCH u.company "
             + "LEFT JOIN FETCH u.studentInformation "
             + "LEFT JOIN FETCH u.role "
+            + "LEFT JOIN FETCH u.credentials "
             + "LEFT JOIN FETCH u.requests r "
             + "LEFT JOIN FETCH r.offer o "
             + "LEFT JOIN FETCH o.company "
@@ -85,6 +88,19 @@ public class UserDataStore extends AbstractDataStore<User> {
             + "LEFT JOIN FETCH u.company c "
             + "WHERE c.name = :companyName", User.class);
     typedQuery.setParameter("companyName", companyName);
+    return typedQuery.getSingleResult();
+  }
+
+  public User findUserForAuthentication(String username) {
+    TypedQuery<User> typedQuery = entityManager
+        .createQuery("SELECT u FROM User u "
+            + "LEFT JOIN FETCH u.company "
+            + "LEFT JOIN FETCH u.studentInformation "
+            + "LEFT JOIN FETCH u.role r "
+            + "LEFT JOIN FETCH r.permissions "
+            + "LEFT JOIN FETCH u.credentials c "
+            + "WHERE c.username = :username", User.class);
+    typedQuery.setParameter("username", username);
     return typedQuery.getSingleResult();
   }
 

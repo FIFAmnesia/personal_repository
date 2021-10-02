@@ -15,6 +15,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 import org.hibernate.Hibernate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import rest.service.abstracts.GenericEntity;
 
 @Entity
@@ -32,6 +34,7 @@ public class Permission implements GenericEntity {
   @Column(name = "value", nullable = false)
   private byte value;
 
+  @JsonIgnore
   @ManyToOne(fetch = LAZY, optional = true)
   @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
   private Role role;

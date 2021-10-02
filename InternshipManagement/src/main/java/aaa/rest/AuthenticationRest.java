@@ -18,12 +18,16 @@ import aaa.dto.Consumer;
 import aaa.dto.LoginRequest;
 import aaa.response.LoginResponse;
 import aaa.service.AuthenticationService;
+import aaa.service.cache.ConsumerCache;
 
 @Path("/aaa")
 public class AuthenticationRest {
 
   @EJB
-  AuthenticationService authenticationService;
+  private AuthenticationService authenticationService;
+
+  @EJB
+  private ConsumerCache consumerCache;
 
   private static final Logger logger = Logger.getLogger(AuthenticationRest.class);
 
@@ -36,7 +40,6 @@ public class AuthenticationRest {
 
     try {
       Consumer consumer = authenticationService.authenticate(request);
-
       request.setConsumer(consumer);
 
       List<LoginRequest> records = new ArrayList<LoginRequest>();
@@ -44,6 +47,7 @@ public class AuthenticationRest {
 
       resp.setSuccess(Boolean.TRUE);
       resp.setRecords(records);
+      resp.setTotalCount((long)records.size());
     } catch (Exception e) {
 
       resp.setSuccess(Boolean.FALSE);
@@ -52,8 +56,19 @@ public class AuthenticationRest {
 
       return Response.status(Status.FORBIDDEN).entity(resp).build();
     }
-    return Response.status(Status.OK).entity(resp).build();
 
+    return Response.status(Status.OK).entity(resp).build();
   }
+
+// endpoint to check in debug mode the contents of the cache
+//  @GET
+//  @Path("/login/getCache")
+//  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//  public Response getCache(LoginRequest request) {
+//    Set<Consumer> consumers = consumerCache.getConsumers();
+//    Map<String, Consumer> tokenToConsumer = consumerCache.getTokenToConsumerRelations();
+//
+//    return Response.status(Status.OK).entity(new LoginResponse()).build();
+//  }
 
 }
