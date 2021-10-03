@@ -48,7 +48,7 @@ public class SettingDataStore extends AbstractDataStore<Setting> {
     return this.findList();
   }
 
-  public String getSettingValue(String name) {
+  public String findByName(String name) {
     TypedQuery<String> typedQuery = entityManager
         .createQuery("SELECT value FROM Setting s "
             + "WHERE s.name = :name", String.class);

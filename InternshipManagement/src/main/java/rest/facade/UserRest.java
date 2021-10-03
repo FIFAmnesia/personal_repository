@@ -1,6 +1,7 @@
 package rest.facade;
 
 import javax.ejb.EJB;
+import javax.interceptor.Interceptors;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -14,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import aaa.service.interceptors.AuthorizationServiceInterceptor;
 import annotations.ManagedEntity;
 import entities.User;
 import responses.implementations.UserStoreResponse;
@@ -23,6 +25,7 @@ import rest.service.implementations.UserCrudService;
 
 @Path("/user")
 @ManagedEntity(User.class)
+@Interceptors(value = {AuthorizationServiceInterceptor.class})
 public class UserRest extends AbstractCrudApi<User, UserStoreResponse> {
 
   @EJB

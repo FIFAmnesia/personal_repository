@@ -43,11 +43,11 @@ public class MailHelper {
     }
 
     if (USERNAME == null) {
-      USERNAME = settingDataStore.getSettingValue("email_sender_username");
+      USERNAME = settingDataStore.findByName("email_sender_username");
     }
 
     if (PASSWORD == null) {
-      PASSWORD = settingDataStore.getSettingValue("email_sender_password");
+      PASSWORD = settingDataStore.findByName("email_sender_password");
     }
   }
 
