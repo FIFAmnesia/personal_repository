@@ -14,6 +14,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import annotations.ManagedEntity;
 import entities.Credentials;
 import responses.implementations.CredentialsStoreResponse;
 import rest.api.abstracts.AbstractCrudApi;
@@ -21,6 +22,7 @@ import rest.service.abstracts.CrudService;
 import rest.service.implementations.CredentialsCrudService;
 
 @Path("/credentials")
+@ManagedEntity(Credentials.class)
 public class CredentialsRest extends AbstractCrudApi<Credentials, CredentialsStoreResponse> {
 
   @EJB

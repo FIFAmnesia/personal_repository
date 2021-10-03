@@ -14,6 +14,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import annotations.ManagedEntity;
 import entities.Role;
 import responses.implementations.RoleStoreResponse;
 import rest.api.abstracts.AbstractCrudApi;
@@ -21,6 +22,7 @@ import rest.service.abstracts.CrudService;
 import rest.service.implementations.RoleCrudService;
 
 @Path("/role")
+@ManagedEntity(Role.class)
 public class RoleRest extends AbstractCrudApi<Role, RoleStoreResponse> {
 
   @EJB

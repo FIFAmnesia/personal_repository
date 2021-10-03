@@ -14,6 +14,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import annotations.ManagedEntity;
 import entities.Request;
 import responses.implementations.RequestStoreResponse;
 import rest.api.abstracts.AbstractCrudApi;
@@ -21,6 +22,7 @@ import rest.service.abstracts.CrudService;
 import rest.service.implementations.RequestCrudService;
 
 @Path("/request")
+@ManagedEntity(Request.class)
 public class RequestRest extends AbstractCrudApi<Request, RequestStoreResponse> {
 
   @EJB
