@@ -14,6 +14,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import annotations.ManagedEntity;
 import entities.Setting;
 import responses.implementations.SettingStoreResponse;
 import rest.api.abstracts.AbstractCrudApi;
@@ -21,6 +22,7 @@ import rest.service.abstracts.CrudService;
 import rest.service.implementations.SettingCrudService;
 
 @Path("/setting")
+@ManagedEntity(Setting.class)
 public class SettingRest extends AbstractCrudApi<Setting, SettingStoreResponse> {
 
   @EJB

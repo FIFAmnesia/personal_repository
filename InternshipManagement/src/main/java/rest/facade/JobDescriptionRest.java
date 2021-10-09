@@ -14,6 +14,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import annotations.ManagedEntity;
 import entities.JobDescription;
 import responses.implementations.JobDescriptionStoreResponse;
 import rest.api.abstracts.AbstractCrudApi;
@@ -21,6 +22,7 @@ import rest.service.abstracts.CrudService;
 import rest.service.implementations.JobDescriptionCrudService;
 
 @Path("/jobdescription")
+@ManagedEntity(JobDescription.class)
 public class JobDescriptionRest extends AbstractCrudApi<JobDescription, JobDescriptionStoreResponse> {
 
   @EJB
