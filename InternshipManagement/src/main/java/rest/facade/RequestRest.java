@@ -1,6 +1,7 @@
 package rest.facade;
 
 import javax.ejb.EJB;
+import javax.interceptor.Interceptors;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -14,6 +15,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import aaa.service.interceptors.AuthorizationServiceInterceptor;
+import aaa.service.interceptors.ParameterValueValidationInterceptor;
 import annotations.ManagedEntity;
 import entities.Request;
 import responses.implementations.RequestStoreResponse;
@@ -42,6 +45,7 @@ public class RequestRest extends AbstractCrudApi<Request, RequestStoreResponse> 
   @POST
   @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  //@Interceptors(value = {ParameterValueValidationInterceptor.class})
   public Response create(Request rec) {
     return super.create(rec);
   }

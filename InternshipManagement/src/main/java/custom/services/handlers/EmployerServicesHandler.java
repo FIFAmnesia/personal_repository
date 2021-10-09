@@ -53,4 +53,9 @@ public class EmployerServicesHandler {
     return Response.status(Status.OK).entity(response).build(); 
   }
 
+  public Response updateInternship(Internship rec, Long internshipId) {
+    ServiceResponse<Internship> response = employerServicesExecutor.updateInternship(rec, internshipId);
+    return Response.status(response.getStatus()).entity(response.getResponse().getRecords().get(0)).build();
+  }
+
 }

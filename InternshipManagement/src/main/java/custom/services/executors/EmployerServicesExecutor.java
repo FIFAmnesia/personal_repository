@@ -10,6 +10,7 @@ import datastore.implementations.RequestDataStore;
 import entities.Internship;
 import entities.Request;
 import responses.abstracts.ServiceResponse;
+import rest.service.implementations.InternshipCrudService;
 import rest.service.implementations.RequestCrudService;
 
 @Stateless
@@ -24,6 +25,9 @@ public class EmployerServicesExecutor {
   @EJB
   private InternshipDataStore internshipDataStore;
 
+  @EJB
+  private InternshipCrudService internshipCrudService;
+
   public List<Request> getPendingRequests(Long companyId) {
     return requestDataStore.findPendingRequests(companyId);
   }
@@ -36,6 +40,10 @@ public class EmployerServicesExecutor {
 
   public List<Internship> getAllInternships(Long companyId) {
     return internshipDataStore.findAllInternshipsForCompany(companyId);
+  }
+
+  public ServiceResponse<Internship> updateInternship(Internship rec, Long internshipId) {
+    return internshipCrudService.update(rec, internshipId);
   }
 
 }

@@ -25,7 +25,7 @@ import rest.service.implementations.UserCrudService;
 
 @Path("/user")
 @ManagedEntity(User.class)
-@Interceptors(value = {AuthorizationServiceInterceptor.class})
+//@Interceptors(value = {AuthorizationServiceInterceptor.class})
 public class UserRest extends AbstractCrudApi<User, UserStoreResponse> {
 
   @EJB
