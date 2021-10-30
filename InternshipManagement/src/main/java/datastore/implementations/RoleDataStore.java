@@ -58,4 +58,12 @@ public class RoleDataStore extends AbstractDataStore<Role> {
     return typedQuery.getResultList();
   }
 
+  public Role findByName(String name) {
+    TypedQuery<Role> typedQuery = entityManager
+        .createQuery("SELECT r FROM Role r "
+            + "WHERE r.name = :name", Role.class);
+    typedQuery.setParameter("name", name);
+    return typedQuery.getSingleResult();
+  }
+
 }

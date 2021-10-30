@@ -65,7 +65,7 @@ public class OfferValidator extends AbstractEntityValidator<Offer> {
     }
 
     if (company == null) {
-      throw new ValidationException("Company with id: " + companyId + " don't exist, please provide a different id!");
+      throw new ValidationException("Company with id: " + companyId + " doesn't exist, please provide a different id!");
     }
 
     dto.setActive(true);

@@ -1,5 +1,6 @@
 package entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,8 +53,7 @@ public class User implements GenericEntity {
   @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
   private Role role;
 
-  @JsonIgnore
-  @OneToOne(fetch = LAZY, mappedBy = "user", targetEntity = Credentials.class)
+  @OneToOne(fetch = LAZY, mappedBy = "user", targetEntity = Credentials.class, cascade = CascadeType.PERSIST)
   private Credentials credentials;
 
   @JsonIgnore

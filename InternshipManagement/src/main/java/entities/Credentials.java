@@ -31,10 +31,10 @@ public class Credentials implements GenericEntity {
   @Column(name = "username", nullable = false)
   private String username;
 
-  @JsonIgnore
   @Column(name = "password", nullable = false)
   private String password;
 
+  @JsonIgnore
   @OneToOne(fetch = LAZY, optional = false)
   @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
   private User user;
