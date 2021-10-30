@@ -43,6 +43,11 @@ public class ConsumerCache {
     return tokenToConsumer;
   }
 
+  @Lock(LockType.READ)
+  public Consumer retrieveConsumerByAccessToken(String key) {
+    return tokenToConsumer.get(key);
+  }
+
   @Lock(LockType.WRITE)
   public void addConsumerToCache(String accessToken, Consumer consumer) {
     consumers.add(consumer);

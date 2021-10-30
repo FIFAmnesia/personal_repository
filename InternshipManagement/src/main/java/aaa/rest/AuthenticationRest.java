@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -58,6 +60,27 @@ public class AuthenticationRest {
     }
 
     return Response.status(Status.OK).entity(resp).build();
+  }
+
+  @GET
+  @Path("/logout")
+  @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_XML, MediaType.APPLICATION_XML})
+  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  public Response logout(@QueryParam("accessToken") String accessToken) {
+    Boolean success = Boolean.FALSE;
+
+    try {
+      success = authenticationService.logout(accessToken);
+    } catch (Exception e) {
+      logger.error("Logout error: " + e.getMessage());
+      return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+    }
+
+    if (success.equals(Boolean.FALSE)) {
+      return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+    }
+
+    return Response.status(Status.OK).build();
   }
 
 // endpoint to check in debug mode the contents of the cache

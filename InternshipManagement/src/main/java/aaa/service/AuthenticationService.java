@@ -111,4 +111,15 @@ public class AuthenticationService {
     return StringUtil.hash(builder.toString(), "MD5");
   }
 
+  public Boolean logout(String accessToken) throws ValidationException {
+    Consumer consumer = consumerCache.retrieveConsumerByAccessToken(accessToken);
+
+    if (consumer != null) {
+      consumerCache.removeConsumerFromCache(accessToken);
+      return Boolean.TRUE;
+    }
+
+    throw new ValidationException("Invalid reload token: " + accessToken);
+  }
+
 }
