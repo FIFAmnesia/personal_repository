@@ -32,7 +32,7 @@ public class StudentServicesHandler {
       response.setMessage("No available offers at this moment of time!");
     }
 
-    return Response.status(Status.OK).entity(response).build(); 
+    return Response.status(Status.OK).entity(response).build();
   }
 
   public Response getApprovedRequests(Long userId) {

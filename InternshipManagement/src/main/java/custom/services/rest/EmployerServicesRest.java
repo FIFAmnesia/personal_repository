@@ -21,6 +21,13 @@ public class EmployerServicesRest {
   @EJB
   private EmployerServicesHandler employerServicesHandler;
 
+  @Path("/offers")
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getActiveOffers(@QueryParam("companyId") Long companyId) {
+    return employerServicesHandler.getActiveOffers(companyId);
+  }
+
   @Path("/requests")
   @GET
   @Produces(MediaType.APPLICATION_JSON)

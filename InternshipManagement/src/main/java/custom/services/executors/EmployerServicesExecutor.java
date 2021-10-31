@@ -6,8 +6,10 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import datastore.implementations.InternshipDataStore;
+import datastore.implementations.OfferDataStore;
 import datastore.implementations.RequestDataStore;
 import entities.Internship;
+import entities.Offer;
 import entities.Request;
 import responses.abstracts.ServiceResponse;
 import rest.service.implementations.InternshipCrudService;
@@ -26,7 +28,14 @@ public class EmployerServicesExecutor {
   private InternshipDataStore internshipDataStore;
 
   @EJB
+  private OfferDataStore offerDataStore;
+
+  @EJB
   private InternshipCrudService internshipCrudService;
+
+  public List<Offer> getActiveOffers(Long companyId) {
+    return offerDataStore.findActiveOffers(companyId);
+  }
 
   public List<Request> getPendingRequests(Long companyId) {
     return requestDataStore.findPendingRequests(companyId);

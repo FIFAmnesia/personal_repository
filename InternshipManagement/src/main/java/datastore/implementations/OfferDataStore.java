@@ -70,6 +70,22 @@ public class OfferDataStore extends AbstractDataStore<Offer> {
     return typedQuery.getResultList();
   }
 
+  public List<Offer> findActiveOffers(Long companyId) {
+    TypedQuery<Offer> typedQuery = entityManager
+        .createQuery("SELECT o FROM Offer o "
+            + "LEFT JOIN FETCH o.company c "
+            + "LEFT JOIN FETCH o.jobDescription "
+            + "LEFT JOIN FETCH o.requests r "
+            + "LEFT JOIN FETCH r.user u "
+            + "LEFT JOIN FETCH u.studentInformation "
+            + "LEFT JOIN FETCH u.role "
+            + "LEFT JOIN FETCH o.internships i "
+            + "LEFT JOIN FETCH i.user "
+            + "WHERE c.id = :companyId", Offer.class);
+    typedQuery.setParameter("companyId", companyId);
+    return typedQuery.getResultList();
+  }
+
   public List<Offer> findActiveOffers(String position, String technology, List<Long> requestedOfferIds) {
     String query = "SELECT o FROM Offer o "
         + "LEFT JOIN FETCH o.company "

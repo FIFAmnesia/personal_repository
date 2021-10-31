@@ -9,9 +9,11 @@ import javax.ws.rs.core.Response.Status;
 
 import custom.services.executors.EmployerServicesExecutor;
 import entities.Internship;
+import entities.Offer;
 import entities.Request;
 import responses.abstracts.ServiceResponse;
 import responses.implementations.InternshipStoreResponse;
+import responses.implementations.OfferStoreResponse;
 import responses.implementations.RequestStoreResponse;
 
 @Stateless
@@ -19,6 +21,20 @@ public class EmployerServicesHandler {
 
   @EJB
   private EmployerServicesExecutor employerServicesExecutor;
+
+  public Response getActiveOffers(Long companyId) {
+    OfferStoreResponse response = new OfferStoreResponse();
+
+    List<Offer> offers = employerServicesExecutor.getActiveOffers(companyId);
+    response.setRecords(offers);
+    response.setSuccess(true);
+    response.setTotalCount(new Long(offers.size()));
+    if (response.getTotalCount().equals(0L)) {
+      response.setMessage("No available offers at this moment of time!");
+    }
+
+    return Response.status(Status.OK).entity(response).build();
+  }
 
   public Response getPendingRequests(Long companyId) {
     RequestStoreResponse response = new RequestStoreResponse();
