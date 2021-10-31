@@ -73,6 +73,10 @@ public class UserValidator extends AbstractEntityValidator<User> {
         throw new ValidationException("Student information isn't provided for the new student. Please provide the additional student information.");
       }
 
+      if (studentInformationDto.getEgn() == null || studentInformationDto.getEgn().length() != 10) {
+        throw new ValidationException("An EGN number consisting of 10 numbers must always be provided for a student");
+      }
+
       ServiceResponse<StudentInformation> response = studentInformationCrudService.create(studentInformationDto);
       if (!response.getResponse().isSuccess()) {
         throw new ValidationException("The provided information about the student information couldn't be persisted: " + response.getResponse().getMessage());

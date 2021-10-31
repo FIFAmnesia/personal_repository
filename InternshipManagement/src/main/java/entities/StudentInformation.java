@@ -27,6 +27,9 @@ public class StudentInformation implements GenericEntity {
   @Column(name = "id", nullable = false)
   private Long id;
 
+  @Column(name = "egn", nullable = false)
+  private String egn;
+
   @Column(name = "faculty_number", nullable = false)
   private String facultyNumber;
 
@@ -56,6 +59,14 @@ public class StudentInformation implements GenericEntity {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public String getEgn() {
+    return egn;
+  }
+
+  public void setEgn(String egn) {
+    this.egn = egn;
   }
 
   public String getFacultyNumber() {
