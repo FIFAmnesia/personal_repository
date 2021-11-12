@@ -51,12 +51,6 @@ select * from credentials;
 
 select * from setting;
 
--- email info won't be in the db script, will insert everytime
-INSERT INTO setting(name, value)
-	VALUES ('email_sender_username', 'antoan.stoilov@gmail.com'),
-		   ('email_sender_password', 'ctcidkphgeectzae'),
-           ('aaa.system.token', 'ZAJO91LIHN4S6H22IX97WFS22HHDEO0N');
-           
 INSERT INTO user(first_name, last_name, phone_number, email,
 				 company_id, student_information_id, role_id)
 	VALUES ('Dimitar', 'Dimitrov', '0876324509', 'antoan.stoilov@gmail.com', 1, null, 3),
