@@ -52,7 +52,7 @@ public class EmployerServicesHandler {
 
   public Response updateRequest(Long requestId, boolean approved) {
     ServiceResponse<Request> response = employerServicesExecutor.updateRequest(requestId, approved);
-    return Response.status(response.getStatus()).entity(response.getResponse().getRecords().get(0)).build();
+    return Response.status(response.getStatus()).entity(response.getResponse()).build();
   }
 
   public Response getAllInternships(Long companyId) {
@@ -71,7 +71,7 @@ public class EmployerServicesHandler {
 
   public Response updateInternship(Internship rec, Long internshipId) {
     ServiceResponse<Internship> response = employerServicesExecutor.updateInternship(rec, internshipId);
-    return Response.status(response.getStatus()).entity(response.getResponse().getRecords().get(0)).build();
+    return Response.status(response.getStatus()).entity(response.getResponse()).build();
   }
 
 }
